@@ -1,5 +1,7 @@
 #include <cassert>
 #include "Matrix.hpp"
+#include <iostream>
+using namespace std;
 
 // REQUIRES: mat points to a Matrix
 //           0 < width && 0 < height
@@ -7,7 +9,9 @@
 // EFFECTS:  Initializes *mat as a Matrix with the given width and height,
 //           with all elements initialized to 0.
 void Matrix_init(Matrix* mat, int width, int height) {
-  assert(false); // TODO Replace with your implementation!
+  mat->width = width;
+  mat->height = height;
+  mat->data = vector<int>(width * height, 0);
 }
 
 // REQUIRES: mat points to a valid Matrix
@@ -19,7 +23,13 @@ void Matrix_init(Matrix* mat, int width, int height) {
 //           by a newline. This means there will be an "extra" space at
 //           the end of each line.
 void Matrix_print(const Matrix* mat, std::ostream& os) {
-  assert(false); // TODO Replace with your implementation!
+  os << mat->width << " " << mat->height << endl;
+  for(int row = 0; row < mat->height; row++) {
+    for(int col = 0; col < mat->width; col++) {
+      
+    }
+  }
+
 }
 
 // REQUIRES: mat points to a valid Matrix
