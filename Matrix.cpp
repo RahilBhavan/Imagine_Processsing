@@ -26,10 +26,11 @@ void Matrix_print(const Matrix* mat, std::ostream& os) {
   os << mat->width << " " << mat->height << endl;
   for(int row = 0; row < mat->height; row++) {
     for(int col = 0; col < mat->width; col++) {
-      
+      int index = row * mat->width + col;
+      os << mat->data[index] << " ";
     }
+    os << endl;
   }
-
 }
 
 // REQUIRES: mat points to a valid Matrix
