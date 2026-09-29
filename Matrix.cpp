@@ -1,5 +1,5 @@
-#include <cassert>
 #include "Matrix.hpp"
+#include <cassert>
 #include <iostream>
 using namespace std;
 
@@ -8,7 +8,7 @@ using namespace std;
 // MODIFIES: *mat
 // EFFECTS:  Initializes *mat as a Matrix with the given width and height,
 //           with all elements initialized to 0.
-void Matrix_init(Matrix* mat, int width, int height) {
+void Matrix_init(Matrix *mat, int width, int height) {
   mat->width = width;
   mat->height = height;
   mat->data = vector<int>(width * height, 0);
@@ -22,10 +22,10 @@ void Matrix_init(Matrix* mat, int width, int height) {
 //           Each element is followed by a space and each row is followed
 //           by a newline. This means there will be an "extra" space at
 //           the end of each line.
-void Matrix_print(const Matrix* mat, std::ostream& os) {
+void Matrix_print(const Matrix *mat, std::ostream &os) {
   os << mat->width << " " << mat->height << endl;
-  for(int row = 0; row < mat->height; row++) {
-    for(int col = 0; col < mat->width; col++) {
+  for (int row = 0; row < mat->height; row++) {
+    for (int col = 0; col < mat->width; col++) {
       int index = row * mat->width + col;
       os << mat->data[index] << " ";
     }
@@ -35,14 +35,12 @@ void Matrix_print(const Matrix* mat, std::ostream& os) {
 
 // REQUIRES: mat points to a valid Matrix
 // EFFECTS:  Returns the width of the Matrix.
-int Matrix_width(const Matrix* mat) {
-  assert(false); // TODO Replace with your implementation!
-}
+int Matrix_width(const Matrix *mat) { return mat->width; }
 
 // REQUIRES: mat points to a valid Matrix
 // EFFECTS:  Returns the height of the Matrix.
-int Matrix_height(const Matrix* mat) {
-  assert(false); // TODO Replace with your implementation!
+int Matrix_height(const Matrix *mat) {
+  return mat->height; // TODO Replace with your implementation!
 }
 
 // REQUIRES: mat points to a valid Matrix
@@ -53,7 +51,7 @@ int Matrix_height(const Matrix* mat) {
 //            element in the Matrix.)
 // EFFECTS:  Returns a pointer to the element in the Matrix
 //           at the given row and column.
-int* Matrix_at(Matrix* mat, int row, int column) {
+int *Matrix_at(Matrix *mat, int row, int column) {
   assert(false); // TODO Replace with your implementation!
 }
 
@@ -63,14 +61,14 @@ int* Matrix_at(Matrix* mat, int row, int column) {
 //
 // EFFECTS:  Returns a pointer-to-const to the element in
 //           the Matrix at the given row and column.
-const int* Matrix_at(const Matrix* mat, int row, int column) {
+const int *Matrix_at(const Matrix *mat, int row, int column) {
   assert(false); // TODO Replace with your implementation!
 }
 
 // REQUIRES: mat points to a valid Matrix
 // MODIFIES: *mat
 // EFFECTS:  Sets each element of the Matrix to the given value.
-void Matrix_fill(Matrix* mat, int value) {
+void Matrix_fill(Matrix *mat, int value) {
   assert(false); // TODO Replace with your implementation!
 }
 
@@ -79,13 +77,13 @@ void Matrix_fill(Matrix* mat, int value) {
 // EFFECTS:  Sets each element on the border of the Matrix to
 //           the given value. These are all elements in the first/last
 //           row or the first/last column.
-void Matrix_fill_border(Matrix* mat, int value) {
+void Matrix_fill_border(Matrix *mat, int value) {
   assert(false); // TODO Replace with your implementation!
 }
 
 // REQUIRES: mat points to a valid Matrix
 // EFFECTS:  Returns the value of the maximum element in the Matrix
-int Matrix_max(const Matrix* mat) {
+int Matrix_max(const Matrix *mat) {
   assert(false); // TODO Replace with your implementation!
 }
 
@@ -99,7 +97,7 @@ int Matrix_max(const Matrix* mat) {
 //           column_end (exclusive).
 //           If multiple elements are minimal, returns the column of
 //           the leftmost one.
-int Matrix_column_of_min_value_in_row(const Matrix* mat, int row,
+int Matrix_column_of_min_value_in_row(const Matrix *mat, int row,
                                       int column_start, int column_end) {
   assert(false); // TODO Replace with your implementation!
 }
@@ -111,7 +109,7 @@ int Matrix_column_of_min_value_in_row(const Matrix* mat, int row,
 // EFFECTS:  Returns the minimal value in a particular region. The region
 //           is defined as elements in the given row and between
 //           column_start (inclusive) and column_end (exclusive).
-int Matrix_min_value_in_row(const Matrix* mat, int row,
-                            int column_start, int column_end) {
+int Matrix_min_value_in_row(const Matrix *mat, int row, int column_start,
+                            int column_end) {
   assert(false); // TODO Replace with your implementation!
 }
