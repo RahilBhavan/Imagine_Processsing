@@ -52,7 +52,11 @@ int Matrix_height(const Matrix *mat) {
 // EFFECTS:  Returns a pointer to the element in the Matrix
 //           at the given row and column.
 int *Matrix_at(Matrix *mat, int row, int column) {
-  assert(false); // TODO Replace with your implementation!
+  return &mat->data[(row * mat->width) +
+                    column]; // The formula for finding the 2D index is row *
+                             // width + column, as there is no 2D index, they
+                             // are stored in a flat array, so you have to find
+                             // the space its stored.
 }
 
 // REQUIRES: mat points to a valid Matrix
@@ -62,14 +66,16 @@ int *Matrix_at(Matrix *mat, int row, int column) {
 // EFFECTS:  Returns a pointer-to-const to the element in
 //           the Matrix at the given row and column.
 const int *Matrix_at(const Matrix *mat, int row, int column) {
-  assert(false); // TODO Replace with your implementation!
+  return &mat->data[(row * mat->width) + column];
 }
 
 // REQUIRES: mat points to a valid Matrix
 // MODIFIES: *mat
 // EFFECTS:  Sets each element of the Matrix to the given value.
 void Matrix_fill(Matrix *mat, int value) {
-  assert(false); // TODO Replace with your implementation!
+  for (int &x : mat->data) {
+    x = value;
+  }
 }
 
 // REQUIRES: mat points to a valid Matrix
@@ -78,13 +84,35 @@ void Matrix_fill(Matrix *mat, int value) {
 //           the given value. These are all elements in the first/last
 //           row or the first/last column.
 void Matrix_fill_border(Matrix *mat, int value) {
-  assert(false); // TODO Replace with your implementation!
+  int w = Matrix_width(
+      mat); // initalizing w to width so we dont have to do it multiple times
+  int h = Matrix_height(
+      mat); // initalizing h to hieght so we dont have to do it multiple times.
+
+  for (int counter = 0; counter < w; ++counter) {
+    *Matrix_at(mat, 0, counter) = value; // Replaces all the horzontal borders
+  }
+
+  for (int counter = 0; counter < h; ++counter) {
+    *Matrix_at(mat, counter, 0) = value; // Replaces all the vertical borders
+  }
 }
 
 // REQUIRES: mat points to a valid Matrix
 // EFFECTS:  Returns the value of the maximum element in the Matrix
 int Matrix_max(const Matrix *mat) {
-  assert(false); // TODO Replace with your implementation!
+  int w = Matrix_width(mat);
+  int h = Matrix_height(mat);
+  int max = *Matrix_at(mat, 0, 0);
+
+  for (int counter_row = 0; counter_row < h; ++counter_row) {
+    for (int counter_width = 0; counter_width < w; ++counter_width) {
+      if (*Matrix_at(mat, counter_row, counter_width) > max) {
+        max = *Matrix_at(mat, counter_row, counter_width);
+      }
+    }
+  }
+  return max;
 }
 
 // REQUIRES: mat points to a valid Matrix
@@ -92,14 +120,21 @@ int Matrix_max(const Matrix *mat) {
 //           0 <= column_start && column_end <= Matrix_width(mat)
 //           column_start < column_end
 // EFFECTS:  Returns the column of the element with the minimal value
-//           in a particular region. The region is defined as elements
+//           in a particular region. The regi:on is defined as elements
 //           in the given row and between column_start (inclusive) and
 //           column_end (exclusive).
 //           If multiple elements are minimal, returns the column of
 //           the leftmost one.
 int Matrix_column_of_min_value_in_row(const Matrix *mat, int row,
                                       int column_start, int column_end) {
-  assert(false); // TODO Replace with your implementation!
+  int min_value = column_start;
+
+  for (int counter = column_start + 1; counter < column_end; ++counter) {
+    if (*Matrix_at(mat, row, min_value) < *Matrix_at(mat, row, counter))
+      min_value = counter;
+  }
+
+  return min_value;
 }
 
 // REQUIRES: mat points to a valid Matrix
@@ -111,5 +146,8 @@ int Matrix_column_of_min_value_in_row(const Matrix *mat, int row,
 //           column_start (inclusive) and column_end (exclusive).
 int Matrix_min_value_in_row(const Matrix *mat, int row, int column_start,
                             int column_end) {
-  assert(false); // TODO Replace with your implementation!
+  int min_column =
+      Matrix_column_of_min_value_in_row(mat, row, column_start, column_end);
+
+  return *Matrix_at(mat, row, min_column);
 }
