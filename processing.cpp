@@ -1,6 +1,6 @@
-#include "processing.hpp"
 #include <cassert>
 #include <vector>
+#include "processing.hpp"
 
 using namespace std;
 
@@ -9,7 +9,7 @@ using namespace std;
 // REQUIRES: img points to a valid Image
 // MODIFIES: *img
 // EFFECTS:  The image is rotated 90 degrees to the left (counterclockwise).
-void rotate_left(Image *img) {
+void rotate_left(Image* img) {
 
   // for convenience
   int width = Image_width(img);
@@ -36,7 +36,7 @@ void rotate_left(Image *img) {
 // REQUIRES: img points to a valid Image.
 // MODIFIES: *img
 // EFFECTS:  The image is rotated 90 degrees to the right (clockwise).
-void rotate_right(Image *img) {
+void rotate_right(Image* img){
 
   // for convenience
   int width = Image_width(img);
@@ -58,6 +58,7 @@ void rotate_right(Image *img) {
 }
 // ^ DO NOT CHANGE ^ ------------------------------------------------
 
+
 // v DO NOT CHANGE v ------------------------------------------------
 // The implementation of diff2 is provided for you.
 static int squared_difference(Pixel p1, Pixel p2) {
@@ -66,12 +67,15 @@ static int squared_difference(Pixel p1, Pixel p2) {
   int db = p2.b - p1.b;
   // Divide by 100 is to avoid possible overflows
   // later on in the algorithm.
-  return (dr * dr + dg * dg + db * db) / 100;
+  return (dr*dr + dg*dg + db*db) / 100;
 }
 // ^ DO NOT CHANGE ^ ------------------------------------------------
 
+
 // ------------------------------------------------------------------
 // You may change code below this line!
+
+
 
 // REQUIRES: img points to a valid Image.
 //           energy points to a Matrix.
@@ -81,8 +85,7 @@ static int squared_difference(Pixel p1, Pixel p2) {
 //           size as the given Image, and then the energy matrix for that
 //           image is computed and written into it.
 //           See the project spec for details on computing the energy matrix.
-void compute_energy_matrix(const Image *img, Matrix *energy) {
-
+void compute_energy_matrix(const Image* img, Matrix* energy) {
   int w = Image_width(img);
   int h = Image_height(img);
 
@@ -102,6 +105,7 @@ void compute_energy_matrix(const Image *img, Matrix *energy) {
   Matrix_fill_border(energy, Matrix_max(energy));
 }
 
+
 // REQUIRES: energy points to a valid Matrix.
 //           cost points to a Matrix.
 //           energy and cost aren't pointing to the same Matrix
@@ -111,8 +115,7 @@ void compute_energy_matrix(const Image *img, Matrix *energy) {
 //           size as the given energy Matrix, and then the cost matrix is
 //           computed and written into it.
 //           See the project spec for details on computing the cost matrix.
-void compute_vertical_cost_matrix(const Matrix *energy, Matrix *cost) {
-
+void compute_vertical_cost_matrix(const Matrix* energy, Matrix *cost) {
   int w = Matrix_width(energy);
   int h = Matrix_height(energy);
 
@@ -141,20 +144,22 @@ void compute_vertical_cost_matrix(const Matrix *energy, Matrix *cost) {
   }
 }
 
+
 // REQUIRES: cost points to a valid Matrix
-// EFFECTS:  Returns the vertical seam with the minimal cost according to the
-// given
-//           cost matrix, represented as a vector filled with the column numbers
-//           for each pixel along the seam, with index 0 representing the lowest
-//           numbered row (top of image). The length of the returned vector is
-//           equal to Matrix_height(cost). While determining the seam, if any
-//           pixels tie for lowest cost, the leftmost one (i.e. with the lowest
-//           column number) is used. See the project spec for details on
-//           computing the minimal seam. Note: When implementing the algorithm,
-//           compute the seam starting at the bottom row and work your way up.
-vector<int> find_minimal_vertical_seam(const Matrix *cost) {
-  vector<int> vert_seam;
+// EFFECTS:  Returns the vertical seam with the minimal cost according to the given
+//           cost matrix, represented as a vector filled with the column numbers for
+//           each pixel along the seam, with index 0 representing the lowest numbered
+//           row (top of image). The length of the returned vector is equal to
+//           Matrix_height(cost).
+//           While determining the seam, if any pixels tie for lowest cost, the
+//           leftmost one (i.e. with the lowest column number) is used.
+//           See the project spec for details on computing the minimal seam.
+//           Note: When implementing the algorithm, compute the seam starting at the
+//           bottom row and work your way up.
+vector<int> find_minimal_vertical_seam(const Matrix* cost) {
+  assert(false); // TODO Replace with your implementation!
 }
+
 
 // REQUIRES: img points to a valid Image with width >= 2
 //           seam.size() == Image_height(img)
@@ -169,8 +174,14 @@ vector<int> find_minimal_vertical_seam(const Matrix *cost) {
 //           then do an assignment at the end to copy it back into the
 //           original image.
 void remove_vertical_seam(Image *img, const vector<int> &seam) {
-  assert(false); // TODO Replace with your implementation!
+  Image smaller;
+  Image_init(&smaller, Image_width(img) - 1, Image_height(img));
+
+  for (int row = 0; row < Image_height(img); row++) {
+    for (int col = 0; col < Image_width(img); col++)
+  }
 }
+
 
 // REQUIRES: img points to a valid Image
 //           0 < newWidth && newWidth <= Image_width(img)
