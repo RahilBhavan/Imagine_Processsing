@@ -21,10 +21,10 @@ void Image_init(Image *img, int width, int height) {
 // EFFECTS:  Initializes the Image by reading in an image in PPM format
 //           from the given input stream.
 // NOTE:     See the project spec for a discussion of PPM format.
-void Image_init(Image *img, std::istream &is) {
+void Image_init(Image* img, std::istream& is) {
   std::string format;
   int width;
-  int height;
+  int height; 
   int max;
 
   is >> format;
@@ -82,7 +82,12 @@ int Image_height(const Image *img) { return img->height; }
 //           0 <= column && column < Image_width(img)
 // EFFECTS:  Returns the pixel in the Image at the given row and column.
 Pixel Image_get_pixel(const Image *img, int row, int column) {
-  assert(false); // TODO Replace with your implementation!
+  Pixel pixel;
+  pixel.r = *Matrix_at(&img->red_channel, row, column);
+  pixel.g = *Matrix_at(&img->green_channel, row, column);
+  pixel.b = *Matrix_at(&img->blue_channel, row, column);
+
+  return pixel;
 }
 
 // REQUIRES: img points to a valid Image
