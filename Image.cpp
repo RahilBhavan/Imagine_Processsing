@@ -18,7 +18,24 @@ void Image_init(Image* img, int width, int height) {
 //           from the given input stream.
 // NOTE:     See the project spec for a discussion of PPM format.
 void Image_init(Image* img, std::istream& is) {
-  assert(false); // TODO Replace with your implementation!
+  string format;
+  int width;
+  int height; 
+  int max;
+
+  is >> format;
+  is >> width >> height;
+  is >> max;
+
+  Image_init(img, width, height);
+
+  for (int row = 0; row < height; row++) {
+    for (int col = 0; col < width; col++) {
+      Pixel pixel;
+      is >> pixel.r >> pixel.g >> pixel.b;
+      Image_set_pixel(img, row, col, pixel);
+    }
+  }
 }
 
 // REQUIRES: img points to a valid Image
