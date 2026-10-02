@@ -157,7 +157,21 @@ void compute_vertical_cost_matrix(const Matrix* energy, Matrix *cost) {
 //           Note: When implementing the algorithm, compute the seam starting at the
 //           bottom row and work your way up.
 vector<int> find_minimal_vertical_seam(const Matrix* cost) {
-  assert(false); // TODO Replace with your implementation!
+  int w = Matrix_width(cost);
+  int h = Matrix_height(cost);
+  vector<int> seam(h); 
+
+  seam[h-1] = Matrix_column_of_min_value_in_row(cost, h - 1, 0, w);
+
+  for (int row = h -2; row > -1; row = row - 1) {
+    int below = seam[row+1];
+    int leftedge = max(below -1, 0);
+    int rightedge = min(below +2, 0);
+    seam[row] = Matrix_column_of_min_value_in_row(cost, row, leftedge, rightedge);
+  }
+
+  return seam;
+
 }
 
 
@@ -200,7 +214,9 @@ void seam_carve_width(Image *img, int newWidth) {
 //           then applying seam_carve_width(img, newHeight), then rotating
 //           90 degrees right.
 void seam_carve_height(Image *img, int newHeight) {
-  assert(false); // TODO Replace with your implementation!
+  rotate_left(img);
+  seam_carve_width(img, newHeight);
+  rotate_right(img);
 }
 
 // REQUIRES: img points to a valid Image
@@ -212,5 +228,6 @@ void seam_carve_height(Image *img, int newHeight) {
 // NOTE:     This is equivalent to applying seam_carve_width(img, newWidth)
 //           and then applying seam_carve_height(img, newHeight).
 void seam_carve(Image *img, int newWidth, int newHeight) {
-  assert(false); // TODO Replace with your implementation!
+  seam_carve_width(img, newWidth);
+  seam_carve_height(img, newHeight);
 }
