@@ -192,8 +192,16 @@ void remove_vertical_seam(Image *img, const vector<int> &seam) {
   Image_init(&smaller, Image_width(img) - 1, Image_height(img));
 
   for (int row = 0; row < Image_height(img); row++) {
-    for (int col = 0; col < Image_width(img); col++)
+    int smaller_img_col = 0;
+    for (int col = 0; col < Image_width(img); col++) {
+      if (col != seam[row]) {
+        Pixel pixel_color = Image_get_pixel(img, row, col);
+        Image_set_pixel(&smaller, row, smaller_img_col, pixel_color);
+        smaller_img_col++;
+      }
+    }
   }
+  *img = smaller;
 }
 
 
@@ -203,7 +211,15 @@ void remove_vertical_seam(Image *img, const vector<int> &seam) {
 // EFFECTS:  Reduces the width of the given Image to be newWidth by using
 //           the seam carving algorithm. See the spec for details.
 void seam_carve_width(Image *img, int newWidth) {
-  assert(false); // TODO Replace with your implementation!
+  int seams_to_remove = Image_width(img) - newWidth;
+  for (int i = 0; i < seams_to_remove; i++) {
+    Matrix energy;
+    compute_energy_matrix(img, &energy);
+    Matrix cost;
+    compute_vertical_cost_matrix(&energy, &cost);
+    vector<int> seam = find_minimal_vertical_seam(&cost);
+    remove_vertical_seam(img, seam);   
+  }
 }
 
 // REQUIRES: img points to a valid Image
@@ -231,3 +247,4 @@ void seam_carve(Image *img, int newWidth, int newHeight) {
   seam_carve_width(img, newWidth);
   seam_carve_height(img, newHeight);
 }
+
