@@ -7,7 +7,8 @@
 using namespace std;
 
 static int how_to_use() {
-    cout << "Usage: resize.exe IN_FILENAME OUT_FILENAME WIDTH [HEIGHT]\n" << "WIDTH and HEIGHT must be less than or equal to original" << endl;
+    cout << "Usage: resize.exe IN_FILENAME OUT_FILENAME WIDTH [HEIGHT]\n"
+     << "WIDTH and HEIGHT must be less than or equal to original" << endl;
     return 1;
 }
 

@@ -51,8 +51,10 @@ int Matrix_height(const Matrix *mat) {
 //            element in the Matrix.)
 // EFFECTS:  Returns a pointer to the element in the Matrix
 //           at the given row and column.
-int *Matrix_at(Matrix *mat, int row, int column) {
-  return &mat->data[(row * mat->width) + column]; // The formula for finding the 2D index is row *
+int *Matrix_at(Matrix *mat, int row, int column) 
+{
+  return &mat->data[(row * mat->width) + column]; 
+                             // The formula for finding the 2D index is row *
                              // width + column, as there is no 2D index, they
                              // are stored in a flat array, so you have to find
                              // the space its stored.
@@ -83,9 +85,10 @@ void Matrix_fill(Matrix *mat, int value) {
 //           the given value. These are all elements in the first/last
 //           row or the first/last column.
 void Matrix_fill_border(Matrix *mat, int value) {
-  int w = Matrix_width(mat); // initalizing w to width so we dont have to do it multiple times
-  int h = Matrix_height(mat); // initalizing h to hieght so we dont have to do it multiple times.
-
+  int w = Matrix_width(mat); 
+  int h = Matrix_height(mat); 
+// initalizing w to width so we dont have to do it multiple times
+// initalizing h to hieght so we dont have to do it multiple times.
   for (int counter = 0; counter < w; ++counter) {
     *Matrix_at(mat, 0, counter) = value; // Replaces all the horzontal borders
     *Matrix_at(mat, h-1, counter) = value;

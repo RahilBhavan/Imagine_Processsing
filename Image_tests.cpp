@@ -87,7 +87,7 @@ TEST(test_all_black) {
   Image test_image;
   Image_init(&test_image, 3, 2);
   for (int row = 0; row < 2; ++row) {
-    for (int col = 2; col < 3; ++col) {
+    for (int col = 0; col < 3; ++col) {
       Pixel test = Image_get_pixel(&test_image, row, col);
       ASSERT_EQUAL(test.r, 0);
       ASSERT_EQUAL(test.g, 0);
