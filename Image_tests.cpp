@@ -40,6 +40,73 @@ TEST(test_print_basic) {
 }
 
 // IMPLEMENT YOUR TEST FUNCTIONS HERE
-// You are encouraged to use any functions from Image_test_helpers.hpp as needed.
+TEST(test_init_dimensions) {
+  Image test_image;
+  Image_init(&test_image, 6, 7);
+  ASSERT_EQUAL(Image_width(&test_image), 6);
+  ASSERT_EQUAL(Image_height(&test_image), 7);
+}
+
+TEST(test_setpixel) {
+  Image test_image;
+  Image_init(&test_image, 2, 2);
+  
+  Pixel p = {2, 5, 10};
+  Image_set_pixel(&test_image, 0, 1, p);
+
+  Pixel test = Image_get_pixel(&test_image, 0, 1);
+  ASSERT_EQUAL(test.r, 2);
+  ASSERT_EQUAL(test.g, 5);
+  ASSERT_EQUAL(test.b, 10);
+}
+
+TEST(test_getpixel) {
+  Image test_image;
+    istringstream picture("P3\n1 1\n255\n10 5 1 \n");
+  Image_init(&test_image, picture);
+
+  Pixel test = Image_get_pixel(&test_image, 0, 0);
+  ASSERT_EQUAL(test.r, 10);
+  ASSERT_EQUAL(test.g, 5);
+  ASSERT_EQUAL(test.b, 1);
+}
+
+TEST(test_fill_simple) {
+  Image test_image;
+  Image_init(&test_image, 2, 2);
+  Pixel colour = {2, 5, 7};
+  Image_fill(&test_image, colour);
+
+  Pixel test = Image_get_pixel(&test_image, 1, 1);
+  ASSERT_EQUAL(test.r, 2);
+  ASSERT_EQUAL(test.g, 5);
+  ASSERT_EQUAL(test.b, 7);
+}
+
+TEST(test_all_black) {
+  Image test_image;
+  Image_init(&test_image, 3, 2);
+  for (int row = 0; row < 2; ++row) {
+    for (int col = 2; col < 3; ++col) {
+      Pixel test = Image_get_pixel(&test_image, row, col);
+      ASSERT_EQUAL(test.r, 0);
+      ASSERT_EQUAL(test.g, 0);
+      ASSERT_EQUAL(test.b, 0);
+    }
+  }  
+}
+
+TEST(test_set_pixel_unusal_shape) {
+  Image img;
+  Image_init(&img, 3, 2);
+  Pixel p = {10, 4, 9};
+  Image_set_pixel(&img, 1, 2, p);
+
+  Pixel test = Image_get_pixel(&img, 1, 2);
+  ASSERT_EQUAL(test.r, 10);
+  ASSERT_EQUAL(test.g, 4);
+  ASSERT_EQUAL(test.b, 9);
+}
 
 TEST_MAIN() // Do NOT put a semicolon here
+

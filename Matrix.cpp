@@ -52,8 +52,7 @@ int Matrix_height(const Matrix *mat) {
 // EFFECTS:  Returns a pointer to the element in the Matrix
 //           at the given row and column.
 int *Matrix_at(Matrix *mat, int row, int column) {
-  return &mat->data[(row * mat->width) +
-                    column]; // The formula for finding the 2D index is row *
+  return &mat->data[(row * mat->width) + column]; // The formula for finding the 2D index is row *
                              // width + column, as there is no 2D index, they
                              // are stored in a flat array, so you have to find
                              // the space its stored.
@@ -84,17 +83,17 @@ void Matrix_fill(Matrix *mat, int value) {
 //           the given value. These are all elements in the first/last
 //           row or the first/last column.
 void Matrix_fill_border(Matrix *mat, int value) {
-  int w = Matrix_width(
-      mat); // initalizing w to width so we dont have to do it multiple times
-  int h = Matrix_height(
-      mat); // initalizing h to hieght so we dont have to do it multiple times.
+  int w = Matrix_width(mat); // initalizing w to width so we dont have to do it multiple times
+  int h = Matrix_height(mat); // initalizing h to hieght so we dont have to do it multiple times.
 
   for (int counter = 0; counter < w; ++counter) {
     *Matrix_at(mat, 0, counter) = value; // Replaces all the horzontal borders
+    *Matrix_at(mat, h-1, counter) = value;
   }
 
   for (int counter = 0; counter < h; ++counter) {
     *Matrix_at(mat, counter, 0) = value; // Replaces all the vertical borders
+    *Matrix_at(mat, counter, w-1) = value;
   }
 }
 
@@ -130,7 +129,7 @@ int Matrix_column_of_min_value_in_row(const Matrix *mat, int row,
   int min_value = column_start;
 
   for (int counter = column_start + 1; counter < column_end; ++counter) {
-    if (*Matrix_at(mat, row, min_value) < *Matrix_at(mat, row, counter))
+    if (*Matrix_at(mat, row, min_value) > *Matrix_at(mat, row, counter))
       min_value = counter;
   }
 

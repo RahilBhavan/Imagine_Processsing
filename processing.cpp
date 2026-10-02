@@ -165,8 +165,16 @@ vector<int> find_minimal_vertical_seam(const Matrix* cost) {
 
   for (int row = h -2; row > -1; row = row - 1) {
     int below = seam[row+1];
-    int leftedge = max(below -1, 0);
-    int rightedge = min(below +2, 0);
+    int leftedge = below -1;
+    int rightedge = below +2;
+
+    if (leftedge < 0 ) {
+      leftedge = 0;
+    }
+    if (rightedge > w ) {
+      rightedge = w;
+    }
+
     seam[row] = Matrix_column_of_min_value_in_row(cost, row, leftedge, rightedge);
   }
 

@@ -1,5 +1,4 @@
 #include "Image.hpp"
-#include <cassert>
 
 // REQUIRES: img points to an Image
 //           0 < width && 0 < height
@@ -9,7 +8,7 @@
 void Image_init(Image *img, int width, int height) {
   img->width = width;
   img->height = height;
-  Matrix_init(&img->red_channel, width, hieght);
+  Matrix_init(&img->red_channel, width, height);
   Matrix_init(&img->blue_channel, width, height);
   Matrix_init(&img->green_channel, width, height);
 }
@@ -71,16 +70,14 @@ void Image_print(const Image *img, std::ostream &os) {
 
 // REQUIRES: img points to a valid Image
 // EFFECTS:  Returns the width of the Image.
-int Image_width(const Image *img) {
-  assert(false); // TODO Replace with your implementation!
-  // RANDOM COMMENT
-  // AYEEE RANDOM COMMENT
+int Image_width(const Image *img) { 
+  return img->width; 
 }
 
 // REQUIRES: img points to a valid Image
 // EFFECTS:  Returns the height of the Image.
-int Image_height(const Image *img) {
-  assert(false); // TODO Replace with your implementation!
+int Image_height(const Image *img) { 
+  return img->height; 
 }
 
 // REQUIRES: img points to a valid Image
@@ -103,7 +100,9 @@ Pixel Image_get_pixel(const Image *img, int row, int column) {
 // EFFECTS:  Sets the pixel in the Image at the given row and column
 //           to the given color.
 void Image_set_pixel(Image *img, int row, int column, Pixel color) {
-  assert(false); // TODO Replace with your implementation!
+  *Matrix_at(&img->red_channel, row, column) = color.r;
+  *Matrix_at(&img->blue_channel, row, column) = color.b;
+  *Matrix_at(&img->green_channel, row, column) = color.g;
 }
 
 // REQUIRES: img points to a valid Image
